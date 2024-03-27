@@ -1,4 +1,4 @@
-package me.dio.satanderdevweek2024.adapters;
+package me.dio.satanderdevweek2024.adapters.out;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,8 +34,8 @@ public class ChampionsJdbcRepositor implements ChampionsRepositor{
     @Override
     public Optional<Champions> findById(Long id) {
         String sql = "SELECT * FROM CHAMPIONS WHERE ID = ?";
-        Champions champion = jdbcTemplate.queryForObject(sql, rowMapper, id);
-        return Optional.ofNullable(champion);
+        List<Champions> champions = jdbcTemplate.query(sql, rowMapper, id);
+        return champions.stream().findFirst();
     }
 }
 
