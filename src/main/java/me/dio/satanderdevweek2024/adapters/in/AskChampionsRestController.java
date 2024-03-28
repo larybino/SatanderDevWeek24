@@ -1,5 +1,7 @@
 package me.dio.satanderdevweek2024.adapters.in;
 import me.dio.satanderdevweek2024.application.AskChampionsUseCase;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequestMapping("/champions")
 public record AskChampionsRestController(AskChampionsUseCase useCase) {
+    
+    @CrossOrigin
     @PostMapping("/{championId}/ask")
     public AskChampionResponse askChampion(@PathVariable Long championId, @RequestBody AskChampionRequest request) {
         String answer = useCase.askChampions(championId, request.question());
